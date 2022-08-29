@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ghaoi.oj_online.mapper.ProblemMapper">
+
+    <insert id="insert">
+        insert into problems values(null,#{title},#{level},#{description},#{templateCode},#{testCode})
+    </insert>
+
+    <delete id="delete">
+        delete from problems where id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="com.ghaoi.oj_online.model.Problem">
+        select id,title,level from problems
+    </select>
+
+    <select id="selectOne" resultType="com.ghaoi.oj_online.model.Problem">
+        select * from problems where id = #{id}
+    </select>
+
+</mapper>

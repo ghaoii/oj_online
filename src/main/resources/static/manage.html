@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>在线OJ平台-题目管理</title>
+    <meta name="description" content="Core HTML Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" href="vendor/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendor/lightcase/lightcase.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Work+Sans:300,400,700" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link href="https://file.myfontastic.com/7vRKgqrN3iFEnLHuqYhYuL/icons.css" rel="stylesheet">
+
+    <!-- Modernizr JS for IE8 support of HTML5 elements and media queries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+
+</head>
+<body data-spy="scroll" data-target="#navbar-nav-header" class="static-layout">
+<div class="boxed-page">
+    <nav id="gtco-header-navbar" class="navbar navbar-expand-lg py-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="文件.png" style="width: 25px; height: 25px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav-header"
+                    aria-controls="navbar-nav-header" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="lnr lnr-menu"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-nav-header">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Back to Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <div class="jumbotron d-flex align-items-center" style="background-image: url(img/hero-2.jpg)">
+        <div class="container text-center">
+            <h1 class="display-2 mb-4">题目管理</h1>
+            <p>管理员的可以对题目进行增加和删除</p>
+        </div>
+    </div>        <!-- Contact Form Section -->
+    <section id="gtco-contact-form" class="bg-white">
+        <div class="container">
+            <div class="section-content">
+                <!-- Section Title -->
+                <div class="title-wrap">
+                    <h2 class="section-title">添加题目</h2>
+                    <!--                <p class="section-sub-title">Praesent commodo cursus magna, vel scelerisque nisl consectetur et. <br> pharetra augue. Donec id elit non mi.</p>-->
+
+                </div>
+                <!-- End of Section Title -->
+                <div class="row">
+                    <!-- Contact Form Holder -->
+                    <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
+                        <div class="row">
+                            <div class="col-md-6 form-input">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Title">
+                            </div>
+                            <div class="col-md-6 form-input">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Level">
+                            </div>
+
+                            <div class="col-md-12 form-textarea">
+                                    <textarea class="form-control" id="description" name="description" rows="40"
+                                              placeholder="description ..."></textarea>
+                            </div>
+
+                            <h3 style="height: 40px; padding: 10px">templateCode</h3>
+                            <div class="col-md-12 form-textarea" id="templateCode" style="min-height:400px">
+                                <textarea class="form-control" id="templateCodeText" style="width: 100%; height: 200px"></textarea>
+                            </div>
+
+                            <h3 style="height: 40px">testCode</h3>
+                            <div class="col-md-12 form-textarea" id="testCode" style="min-height:400px">
+                                <textarea class="form-control" id="testCodeText" style="width: 100%; height: 200px"></textarea>
+                            </div>
+
+                            <div class="col-md-6 form-btn text-center">
+                                <button class="btn btn-block btn-secondary btn-red" type="submit" style="margin: 20px"
+                                        onclick= insert()>
+                                    Insert Problem
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Contact Form Holder -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section  class="bg-white">
+        <div class="container">
+            <div class="section-content">
+                <!-- Section Title -->
+                <div class="title-wrap">
+                    <h2 class="section-title">删除题目</h2>
+                </div>
+                <!-- End of Section Title -->
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
+                        <div class="row">
+                            <div class="col-md-6 form-input">
+                                <input type="text" class="form-control" name="name" placeholder="Id">
+                            </div>
+
+                            <div class="col-md-6 form-input">
+                                <div class="col-md-6 form-btn text-center">
+                                    <button class="btn btn-block btn-secondary btn-red" type="submit">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 form-input">
+                                <input type="text" class="form-control" placeholder="Title">
+                            </div>
+
+                            <div class="col-md-6 form-input">
+                                <input type="text" class="form-control" placeholder="Level">
+                            </div>
+
+                            <div class="col-md-12 form-btn text-center">
+                                <button class="btn btn-block btn-secondary btn-red" type="submit">
+                                    Delete
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Contact Form Section -->
+    <footer class="mastfoot mb-3 bg-white py-4 border-top">
+        <div class="inner container">
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center justify-content-md-start justify-content-center">
+                    <p class="mb-0">&copy; 郭昊</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+</div>
+<!-- External JS -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script src="vendor/bootstrap/popper.min.js"></script>
+<script src="vendor/bootstrap/bootstrap.min.js"></script>
+<script src="vendor/select2/select2.min.js "></script>
+<script src="vendor/owlcarousel/owl.carousel.min.js"></script>
+<script src="vendor/isotope/isotope.min.js"></script>
+<script src="vendor/lightcase/lightcase.js"></script>
+<script src="vendor/waypoints/waypoint.min.js"></script>
+<script src="vendor/countTo/jquery.countTo.js"></script>
+
+<!-- Main JS -->
+<script src="js/app.min.js "></script>
+<script src="//localhost:35729/livereload.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://cdn.bootcss.com/ace/1.2.9/ace.js"></script>
+<script src="https://cdn.bootcss.com/ace/1.2.9/ext-language_tools.js"></script>
+
+<script>
+    // 初始化 ace.js
+    function initAce1() {
+        // 参数 editor 对应到刚才在 html 里加的那个 div 的 id
+        let templateCode = ace.edit("templateCode");
+        templateCode.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+        templateCode.setTheme("ace/theme/twilight");
+        templateCode.session.setMode("ace/mode/java");
+        templateCode.resize();
+        document.getElementById('templateCode').style.fontSize = '16px';
+
+        return templateCode;// 返回后能在外部使用
+    }
+    let templateCode = initAce1();
+
+    // 初始化 ace.js
+    function initAce2() {
+        // 参数 editor 对应到刚才在 html 里加的那个 div 的 id
+        let testCode = ace.edit("testCode");
+        testCode.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+        testCode.setTheme("ace/theme/twilight");
+        etestCodeditor.session.setMode("ace/mode/java");
+        testCode.resize();
+        document.getElementById('testCode').style.fontSize = '16px';
+
+        return testCode;// 返回后能在外部使用
+    }
+    let testCode = initAce2();
+</script>
+</body>
+</html>

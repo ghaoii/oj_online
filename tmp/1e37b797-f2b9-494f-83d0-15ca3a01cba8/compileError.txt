@@ -1,0 +1,6 @@
+./tmp/1e37b797-f2b9-494f-83d0-15ca3a01cba8/Solution.java:3: 错误: 找不到符号
+        return a;
+               ^
+  符号:   变量 a
+  位置: 类 Solution
+1 个错误
