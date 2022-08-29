@@ -1,0 +1,10 @@
+./tmp/d83aed17-7e9b-421a-919c-2a4f930275d2/Solution.java:7: 错误: 非法的类型开始
+null
+^
+./tmp/d83aed17-7e9b-421a-919c-2a4f930275d2/Solution.java:7: 错误: 需要';'
+null
+    ^
+./tmp/d83aed17-7e9b-421a-919c-2a4f930275d2/Solution.java:8: 错误: 解析时已到达文件结尾
+}
+ ^
+3 个错误

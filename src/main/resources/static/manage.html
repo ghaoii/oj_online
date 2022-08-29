@@ -33,7 +33,7 @@
     <nav id="gtco-header-navbar" class="navbar navbar-expand-lg py-4">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="文件.png" style="width: 25px; height: 25px">
+                <img src="img/文件.png" style="width: 25px; height: 25px">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav-header"
                     aria-controls="navbar-nav-header" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,8 @@
             <h1 class="display-2 mb-4">题目管理</h1>
             <p>管理员的可以对题目进行增加和删除</p>
         </div>
-    </div>        <!-- Contact Form Section -->
+    </div>
+    <!-- Contact Form Section -->
     <section id="gtco-contact-form" class="bg-white">
         <div class="container">
             <div class="section-content">
@@ -70,14 +71,14 @@
                     <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
                         <div class="row">
                             <div class="col-md-6 form-input">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Title">
+                                <input type="text" class="form-control" id="title" placeholder="Title">
                             </div>
                             <div class="col-md-6 form-input">
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Level">
+                                <input type="text" class="form-control" id="level" placeholder="Level">
                             </div>
 
                             <div class="col-md-12 form-textarea">
-                                    <textarea class="form-control" id="description" name="description" rows="40"
+                                    <textarea class="form-control" id="description" rows="40"
                                               placeholder="description ..."></textarea>
                             </div>
 
@@ -93,7 +94,7 @@
 
                             <div class="col-md-6 form-btn text-center">
                                 <button class="btn btn-block btn-secondary btn-red" type="submit" style="margin: 20px"
-                                        onclick= insert()>
+                                        onclick = insert()>
                                     Insert Problem
                                 </button>
                             </div>
@@ -117,27 +118,27 @@
                     <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
                         <div class="row">
                             <div class="col-md-6 form-input">
-                                <input type="text" class="form-control" name="name" placeholder="Id">
+                                <input type="text" class="form-control" id="id" placeholder="Id">
                             </div>
 
                             <div class="col-md-6 form-input">
                                 <div class="col-md-6 form-btn text-center">
-                                    <button class="btn btn-block btn-secondary btn-red" type="submit">
+                                    <button class="btn btn-block btn-secondary btn-red" type="submit" onclick="search()">
                                         Search
                                     </button>
                                 </div>
                             </div>
 
                             <div class="col-md-6 form-input">
-                                <input type="text" class="form-control" placeholder="Title">
+                                <input type="text" class="form-control" id="titleDel" placeholder="Title">
                             </div>
 
                             <div class="col-md-6 form-input">
-                                <input type="text" class="form-control" placeholder="Level">
+                                <input type="text" class="form-control" id="levelDel" placeholder="Level">
                             </div>
 
                             <div class="col-md-12 form-btn text-center">
-                                <button class="btn btn-block btn-secondary btn-red" type="submit">
+                                <button class="btn btn-block btn-secondary btn-red" type="submit" onclick="deleteProblem()">
                                     Delete
                                 </button>
                             </div>
@@ -180,6 +181,58 @@
 <script src="https://cdn.bootcss.com/ace/1.2.9/ext-language_tools.js"></script>
 
 <script>
+    function insert() {
+        let title = document.querySelector("#title");
+        let level = document.querySelector("#level");
+        let desc = document.querySelector("#description");
+
+        jQuery.post(
+            "problem/insert",
+            {
+                "title": title.value,
+                "level": level.value,
+                "description": desc.value,
+                "templateCode": templateCode.getValue(),
+                "testCode": testCode.getValue()
+            },
+            function (data) {
+                if(data === 1) {
+                    alert("添加成功!");
+                }else {
+                    alert("添加失败!");
+                }
+            }
+        )
+    }
+
+    function search() {
+        let id = document.querySelector("#id");
+        jQuery.getJSON(
+            "problem/detail?id=" + id.value,
+            {},
+            function (data) {
+                let titleDel = document.querySelector("#titleDel");
+                titleDel.value = data.title;
+                let levelDel = document.querySelector("#levelDel");
+                levelDel.value = data.level;
+            }
+        )
+    }
+
+    function deleteProblem() {
+        jQuery.getJSON(
+            "problem/delete?id=" + id.value,
+            {},
+            function (data) {
+                if(data === 1) {
+                    alert("删除成功!");
+                }else {
+                    alert("删除失败!")
+                }
+            }
+        )
+    }
+
     // 初始化 ace.js
     function initAce1() {
         // 参数 editor 对应到刚才在 html 里加的那个 div 的 id
@@ -192,7 +245,7 @@
         templateCode.setTheme("ace/theme/twilight");
         templateCode.session.setMode("ace/mode/java");
         templateCode.resize();
-        document.getElementById('templateCode').style.fontSize = '16px';
+        document.getElementById('templateCode').style.fontSize = '14px';
 
         return templateCode;// 返回后能在外部使用
     }
@@ -208,9 +261,9 @@
             enableLiveAutocompletion: true
         });
         testCode.setTheme("ace/theme/twilight");
-        etestCodeditor.session.setMode("ace/mode/java");
+        testCode.session.setMode("ace/mode/java");
         testCode.resize();
-        document.getElementById('testCode').style.fontSize = '16px';
+        document.getElementById('testCode').style.fontSize = '14px';
 
         return testCode;// 返回后能在外部使用
     }

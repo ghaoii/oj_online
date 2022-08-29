@@ -6,7 +6,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>在线OJ平台</title>
+    <title>Moon - Multipurpose Bootstrap 4 Template by cssmoban</title>
     <meta name="description" content="Core HTML Project">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -29,87 +29,70 @@
 
 </head>
 <body data-spy="scroll" data-target="#navbar-nav-header" class="static-layout">
-
-<div class="adcenter">
-    <script src="http://www.baisheng999.com/include/new/ggad2_728x90.js"></script>
-</div>
-
 <div class="boxed-page">
     <nav id="gtco-header-navbar" class="navbar navbar-expand-lg py-4">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="img/首页.png" style="width: 25px; height: 25px">
+                <img src="img/文件.png" style="width: 25px; height: 25px">
             </a>
-            <!--会缩进的按钮列表-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-nav-header"
                     aria-controls="navbar-nav-header" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="lnr lnr-menu"></span>
             </button>
-            <!--导航栏-->
             <div class="collapse navbar-collapse" id="navbar-nav-header">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">Manage</a>
+                        <a class="nav-link" href="index.html">Back to Home</a>
                     </li>
                 </ul>
             </div>
         </div>
-    </nav>
 
+    </nav>
     <div class="jumbotron d-flex align-items-center" style="background-image: url(img/hero-2.jpg)">
         <div class="container text-center">
-            <h1 class="display-2 mb-4">在线OJ平台</h1>
-            <p>基于 Java SpringBoot 的在线OJ平台</p>
+            <h1 class="display-2 mb-4">管理员登录</h1>
+            <p>登录后进入题目管理页面</p>
         </div>
     </div>
-
-    <section id="gtco-who-we-are" class="bg-white">
-        <div class="container">
-            <div class="section-content">
-                <div class="title-wrap">
-                    <h2 class="section-title">题目列表</h2>
-                    <table style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>编号</th>
-                                <th>题目</th>
-                                <th>难度</th>
-                            </tr>
-                        </thead>
-                        <tbody id="problemTbody">
-                            <tr>
-
-                            </tr>
-                        </tbody>
-                    </table>
-<!--                    <p class="section-sub-title">1111</p>-->
-                </div>
-                <!-- /.row -->
-            </div>
-        </div>
-    </section>
-    <!-- Features Section-->
-    <section id="gtco-features" class="bg-white">
+    <!-- Contact Form Section -->
+    <section id="gtco-contact-form" class="bg-white">
         <div class="container">
             <div class="section-content">
                 <!-- Section Title -->
                 <div class="title-wrap">
-                    <!--占位块-->
+                    <h2 class="section-title">Login</h2>
+                    <p class="section-sub-title">请在下面输入管理员账号和密码</p>
                 </div>
                 <!-- End of Section Title -->
+                <div class="row">
+                    <!-- Contact Form Holder -->
+                    <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
+                        <div class="row">
+                            <div class="col-md-6 form-input">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="用户名是admin">
+                            </div>
+                            <div class="col-md-6 form-input">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="密码是admin">
+                            </div>
+                            <div class="col-md-12 form-btn text-center">
+                                <button class="btn btn-block btn-secondary btn-red" type="submit" name="submit"
+                                        onclick="login()">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Contact Form Holder -->
+                </div>
             </div>
         </div>
     </section>
-    <!-- End of Features Section-->
-
-    <!-- End of Client Section -->
+    <!-- End of Contact Form Section -->
     <footer class="mastfoot mb-3 bg-white py-4 border-top">
         <div class="inner container">
             <div class="row">
-                <div class="col-md-12 d-flex align-items-center justify-content-md-start justify-content-center">
+                <div class="col-md-6 d-flex align-items-center justify-content-md-start justify-content-center">
                     <p class="mb-0">&copy; 郭昊</p>
                 </div>
             </div>
@@ -131,45 +114,18 @@
 
 <!-- Main JS -->
 <script src="js/app.min.js "></script>
+<script src="//localhost:35729/livereload.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<!--<script src="//localhost:35729/livereload.js"></script>-->
-
 <script>
-    function getProblems() {
-        jQuery.getJSON(
-            "problem/list",
-            {},
-            function (data) {
-                makeProblems(data);
-            }
-        )
-    }
-
-    function makeProblems(problems) {
-        let problemTbody = document.querySelector("#problemTbody");
-        for(let problem of problems) {
-            let tr = document.createElement("tr");
-
-            let idTd = document.createElement("td");
-            idTd.innerHTML = problem.id;
-            tr.appendChild(idTd);
-
-            let titleTd = document.createElement("td");
-            let a = document.createElement("a");
-            a.href = "detail.html?id=" + problem.id;
-            a.innerHTML = problem.title;
-            titleTd.appendChild(a);
-            tr.appendChild(titleTd);
-
-            let levelTd = document.createElement("td");
-            levelTd.innerHTML = problem.level;
-            tr.appendChild(levelTd);
-
-            problemTbody.appendChild(tr);
+    function login() {
+        let name = document.querySelector("#name");
+        let password = document.querySelector("#password");
+        if(name.value === "admin" && password.value === "admin") {
+            location.href = "manage.html";
+        }else {
+            alert("用户名或密码输入有误!");
         }
     }
-
-    getProblems();
 </script>
 </body>
 </html>

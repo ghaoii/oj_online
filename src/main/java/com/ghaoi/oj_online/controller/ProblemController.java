@@ -32,7 +32,7 @@ public class ProblemController {
     }
 
     @RequestMapping("/delete")
-    public int removeProblem(int id) {
+    public int removeProblem(Integer id) {
         return problemMapper.delete(id);
     }
 
