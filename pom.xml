@@ -65,6 +65,8 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>oj_online</finalName>
     </build>
+
 
 </project>

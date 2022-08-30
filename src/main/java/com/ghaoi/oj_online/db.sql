@@ -21,3 +21,4 @@ create table user(
     password varchar(20) not null
 );
 
+insert into user values(null,'admin','admin');

@@ -1,0 +1,4 @@
+./tmp/30659c6f-2906-4c0b-810d-f319596a3f34/Solution.java:4: 错误: 程序包Sytem不存在
+        Sytem.out.println(a);
+             ^
+1 个错误
