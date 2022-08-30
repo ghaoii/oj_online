@@ -12,3 +12,12 @@ create table problems(
     templateCode varchar(4096),
     testCode varchar(4096)
 );
+
+drop table if exists user;
+
+create table user(
+    id int primary key auto_increment,
+    username varchar(20) not null,
+    password varchar(20) not null
+);
+

@@ -61,7 +61,7 @@
     <section id="gtco-blog" class="bg-white">
         <div class="container">
             <div class="section-content blog-content">
-                <div class="row" id="detail">
+                <div class="row" id="problemTitle">
 
 <!--                    <h4>题目详情</h4>-->
 <!--                    <p>1.两数之和_简单</p>-->
@@ -70,7 +70,9 @@
 <!--                    </pre>-->
 
                 </div>
+                <div class="row" id="detail">
 
+                </div>
             </div>
         </div>
     </section>
@@ -140,22 +142,35 @@
 <script src="https://cdn.bootcss.com/ace/1.2.9/ace.js"></script>
 <script src="https://cdn.bootcss.com/ace/1.2.9/ext-language_tools.js"></script>
 <script>
-    function getProblem() {
-        jQuery.post(
-            "problem/detail" + location.search,
-            {},
-            function (data) {
-                makeDetail(data);
-            }
-        )
-    }
+    $.ajax({
+        url: "problem/detail" + location.search,
+        type: "GET",
+        success: function (data) {
+            makeDetail(data);
+        },
+        error: function () {
+            alert("请先登录");
+            location.href = "login.html";
+        }
+    })
+
+    // function getProblem() {
+    //     jQuery.post(
+    //         "problem/detail" + location.search,
+    //         {},
+    //         function (data) {
+    //             makeDetail(data);
+    //         }
+    //     )
+    // }
 
     function makeDetail(problem) {
+        let problemTitle = document.querySelector("#problemTitle");
         let detail = document.querySelector("#detail");
 
         let detailH = document.createElement("h3");
         detailH.innerHTML = problem.id + "." + problem.title + "_" + problem.level;
-        detail.appendChild(detailH);
+        problemTitle.appendChild(detailH);
 
         let descPre = document.createElement("pre");
         let descP = document.createElement("p");
@@ -185,7 +200,7 @@
         }
     }
 
-    getProblem();
+    // getProblem();
 
     // 初始化 ace.js
     function initAce() {

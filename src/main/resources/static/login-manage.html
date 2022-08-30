@@ -6,7 +6,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>登录</title>
+    <title>管理员登录页</title>
     <meta name="description" content="Core HTML Project">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -42,7 +42,7 @@
             <div class="collapse navbar-collapse" id="navbar-nav-header">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="register.html">Register</a>
+                        <a class="nav-link" href="index.html">Back to Home</a>
                     </li>
                 </ul>
             </div>
@@ -51,8 +51,8 @@
     </nav>
     <div class="jumbotron d-flex align-items-center" style="background-image: url(img/hero-2.jpg)">
         <div class="container text-center">
-            <h1 class="display-2 mb-4">登录</h1>
-            <p>登录后进入题目列表页</p>
+            <h1 class="display-2 mb-4">管理员登录</h1>
+            <p>登录后进入题目管理页面</p>
         </div>
     </div>
     <!-- Contact Form Section -->
@@ -62,7 +62,7 @@
                 <!-- Section Title -->
                 <div class="title-wrap">
                     <h2 class="section-title">Login</h2>
-                    <p class="section-sub-title">请在输入用户名和密码</p>
+                    <p class="section-sub-title">请在下面输入管理员账号和密码</p>
                 </div>
                 <!-- End of Section Title -->
                 <div class="row">
@@ -70,10 +70,10 @@
                     <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
                         <div class="row">
                             <div class="col-md-6 form-input">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Username">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="用户名是admin">
                             </div>
                             <div class="col-md-6 form-input">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="密码是admin">
                             </div>
                             <div class="col-md-12 form-btn text-center">
                                 <button class="btn btn-block btn-secondary btn-red" type="submit" name="submit"
@@ -120,20 +120,11 @@
     function login() {
         let name = document.querySelector("#name");
         let password = document.querySelector("#password");
-        jQuery.post(
-            "user/login",
-            {
-                "username": name.value,
-                "password": password.value
-            },
-            function (data) {
-                if(data.state === 1) {
-                    location.href = "index.html";
-                }else {
-                    alert(data.msg);
-                }
-            }
-        )
+        if(name.value === "admin" && password.value === "admin") {
+            location.href = "manage.html";
+        }else {
+            alert("用户名或密码输入有误!");
+        }
     }
 </script>
 </body>

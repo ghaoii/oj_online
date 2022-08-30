@@ -26,6 +26,11 @@ public class ProblemController {
     @Autowired
     private Task task;
 
+    @RequestMapping("/search")
+    public Problem search(Integer id){
+        return problemMapper.selectOne(id);
+    }
+
     @RequestMapping("/insert")
     public int addProblem(Problem problem) {
         return problemMapper.insert(problem);

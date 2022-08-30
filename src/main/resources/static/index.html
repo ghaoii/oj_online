@@ -52,7 +52,10 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Manage</a>
+                        <a class="nav-link" href="login-manage.html">Manage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="logout()">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -135,15 +138,42 @@
 <!--<script src="//localhost:35729/livereload.js"></script>-->
 
 <script>
-    function getProblems() {
+    $.ajax({
+        url: "problem/list",
+        type: "GET",
+        success: function (data) {
+            makeProblems(data);
+        },
+        error: function () {
+            alert("请先登录");
+            location.href = "login.html";
+        }
+    })
+
+    function logout() {
         jQuery.getJSON(
-            "problem/list",
+            "user/logout",
             {},
             function (data) {
-                makeProblems(data);
+                if(data.state === 1) {
+                    alert("注销成功!");
+                    location.href = "login.html";
+                }else {
+                    alert(data.msg);
+                }
             }
         )
     }
+
+    // function getProblems() {
+    //     jQuery.getJSON(
+    //         "problem/list",
+    //         {},
+    //         function (data) {
+    //             makeProblems(data);
+    //         }
+    //     )
+    // }
 
     function makeProblems(problems) {
         let problemTbody = document.querySelector("#problemTbody");
@@ -169,7 +199,7 @@
         }
     }
 
-    getProblems();
+    // getProblems();
 </script>
 </body>
 </html>

@@ -1,0 +1,4 @@
+./tmp/71b27456-558a-4896-ad3f-2f0b69c90b3a/Solution.java:3: 错误: 不兼容的类型: int无法转换为int[]
+        return 10;
+               ^
+1 个错误

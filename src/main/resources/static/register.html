@@ -6,7 +6,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>登录</title>
+    <title>注册</title>
     <meta name="description" content="Core HTML Project">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -42,7 +42,7 @@
             <div class="collapse navbar-collapse" id="navbar-nav-header">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="register.html">Register</a>
+                        <a class="nav-link" href="login.html">Login</a>
                     </li>
                 </ul>
             </div>
@@ -51,8 +51,8 @@
     </nav>
     <div class="jumbotron d-flex align-items-center" style="background-image: url(img/hero-2.jpg)">
         <div class="container text-center">
-            <h1 class="display-2 mb-4">登录</h1>
-            <p>登录后进入题目列表页</p>
+            <h1 class="display-2 mb-4">注册</h1>
+            <p>注册后进入题目列表页</p>
         </div>
     </div>
     <!-- Contact Form Section -->
@@ -61,7 +61,7 @@
             <div class="section-content">
                 <!-- Section Title -->
                 <div class="title-wrap">
-                    <h2 class="section-title">Login</h2>
+                    <h2 class="section-title">Register</h2>
                     <p class="section-sub-title">请在输入用户名和密码</p>
                 </div>
                 <!-- End of Section Title -->
@@ -69,16 +69,19 @@
                     <!-- Contact Form Holder -->
                     <div class="col-md-8 offset-md-2 contact-form-holder mt-4">
                         <div class="row">
-                            <div class="col-md-6 form-input">
+                            <div class="col-md-12 form-input">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Username">
                             </div>
-                            <div class="col-md-6 form-input">
+                            <div class="col-md-12 form-input">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            </div>
+                            <div class="col-md-12 form-input">
+                                <input type="password" class="form-control" id="passwordConfirm" name="password" placeholder="Confirm Password">
                             </div>
                             <div class="col-md-12 form-btn text-center">
                                 <button class="btn btn-block btn-secondary btn-red" type="submit" name="submit"
-                                        onclick="login()">
-                                    Login
+                                        onclick="register()">
+                                    Register
                                 </button>
                             </div>
                         </div>
@@ -117,11 +120,24 @@
 <script src="//localhost:35729/livereload.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
-    function login() {
+    function register() {
         let name = document.querySelector("#name");
         let password = document.querySelector("#password");
+        let passwordConfirm = document.querySelector("#passwordConfirm");
+        if(name.value === "") {
+            alert("请输入用户名!");
+            return;
+        }
+        if(password.value === "" || passwordConfirm.value === "") {
+            alert("请输入密码!");
+            return;
+        }
+        if(password.value !== passwordConfirm.value) {
+            alert("两次密码输入不一致!请检查!");
+            return;
+        }
         jQuery.post(
-            "user/login",
+            "user/register",
             {
                 "username": name.value,
                 "password": password.value

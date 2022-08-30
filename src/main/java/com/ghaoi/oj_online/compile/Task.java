@@ -4,6 +4,8 @@ import com.ghaoi.oj_online.common.FileUtil;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -35,6 +37,13 @@ public class Task {
         if (!file.exists()) {
             // 如果保存输出结果的目录不存在，则先创建目录
             file.mkdirs();
+        }
+        if(!codeIsSafe(question.getCode())) {
+            // 代码不安全
+            System.out.println("用户提交了不安全的代码");
+            answer.setError(3);
+            answer.setReason("您提交的代码可能危害到服务器，禁止运行!");
+            return answer;
         }
         FileUtil.writeFile(CODE, question.getCode());
         // 构建编译命令，并将生成的类文件放到WORKDIR中
@@ -68,5 +77,22 @@ public class Task {
         answer.setError(0);
         answer.setStdout(FileUtil.readFile(STDOUT));
         return answer;
+    }
+
+    private boolean codeIsSafe(String code) {
+        List<String> blackList = new ArrayList<>();
+        blackList.add("Runtime");
+        blackList.add("exec");
+        blackList.add("java.io");
+        blackList.add("java.net");
+        for(String str : blackList) {
+            int i = code.indexOf("str");
+            if(i >= 0) {
+                // 如果在代码中识别到该命令，则代码不安全
+                return false;
+            }
+        }
+        // 代码中没有识别到危险操作
+        return true;
     }
 }
