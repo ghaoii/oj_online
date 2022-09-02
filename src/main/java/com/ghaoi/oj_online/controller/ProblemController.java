@@ -8,11 +8,14 @@ import com.ghaoi.oj_online.compile.Question;
 import com.ghaoi.oj_online.compile.Task;
 import com.ghaoi.oj_online.mapper.ProblemMapper;
 import com.ghaoi.oj_online.model.Problem;
+import com.ghaoi.oj_online.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,5 +104,30 @@ public class ProblemController {
             return null;
         }
         return userCode.substring(0, index) + "\n" + testCode + "\n}";
+    }
+
+    @RequestMapping("/manage")
+    public Object isAdmin(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<>();
+        int state = -1;
+        String msg = "";
+        // 由于管理员页面的登录验证需要特殊检测，因此不进行统一处理
+        HttpSession session = request.getSession(false);
+        if(session == null) {
+            msg = "请先登录管理员账号!";
+        }else {
+            // 此时已经处于登录状态，检测该用户是否为管理员
+            User user = (User) session.getAttribute("user");
+            if(!"admin".equals(user.getUsername())) {
+                // 该用户不是管理员
+                msg = "您不是管理员!请登录管理员账号";
+            }else {
+                // 该用户是管理员
+                state = 1;
+            }
+        }
+        map.put("state", state);
+        map.put("msg", msg);
+        return map;
     }
 }
